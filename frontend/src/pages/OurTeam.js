@@ -6,8 +6,8 @@ import img2 from "../components/images/shubhi.jpg";
 import img3 from "../components/images/puja.jpg";
 import img4 from "../components/images/vrunda.jpg";
 
-import img5 from "../components/images/supriya.jpg";
-import img6 from "../components/images/rohit.jpeg";
+import img6 from "../components/images/supriya.jpg";
+import img5 from "../components/images/rohit.jpeg";
 import img7 from "../components/images/pratiksha.jpeg";
 import SecImage from "../components/SecImage";
 
@@ -48,7 +48,7 @@ function OurTeam() {
                     fontFamily: "cursive",
                   }}
                 >
-                  Supriya
+                  Rohit
                 </h4>
               </div>
             </div>
@@ -151,7 +151,7 @@ function OurTeam() {
                     fontFamily: "cursive",
                   }}
                 >
-                  Rohit
+                  Supriya
                 </h4>
               </div>
             </div>
