@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "../components/login.css";
 
@@ -10,7 +9,6 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { YupAdminLogin } from "../schemas/AdminYup";
 
-
 export default function AdminLogin() {
   return (
     <div>
@@ -20,54 +18,53 @@ export default function AdminLogin() {
 }
 const initialValues = {
   email: "",
-  password: ""
-}
+  password: "",
+};
 function AdminLoginTable() {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate()
-  
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
-  const checkUser = async (email,password) => {
-    let user = { userid:email, pwd: password };
-    await axios.post("http://localhost:8080/api/admin/avalidate", user)
-    .then(resp=>{
-        sessionStorage.setItem("uname",resp.data.uname)
-        sessionStorage.setItem("role",resp.data.role)
-        sessionStorage.setItem("userid",resp.data.userid)
-        sessionStorage.setItem("id",resp.data.id)
-        dispatch({type:'IsLoggedIn'})
+  const checkUser = async (email, password) => {
+    let user = { userid: email, pwd: password };
+    await axios
+      .post("http://localhost:8080/api/admin/avalidate", user)
+      .then((resp) => {
+        sessionStorage.setItem("uname", resp.data.uname);
+        sessionStorage.setItem("role", resp.data.role);
+        sessionStorage.setItem("userid", resp.data.userid);
+        sessionStorage.setItem("id", resp.data.id);
+        dispatch({ type: "IsLoggedIn" });
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Welcome "+resp.data.role,
+          title: "Welcome " + resp.data.role,
           showConfirmButton: false,
           timer: 1500,
-      });
-      navigate('/')
-    })
-    .catch(error=>{
-      Swal.fire({
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data          
-        });   
-    }) 
+          text: error.response.data,
+        });
+      });
   };
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-  useFormik({
-
-    initialValues: initialValues,
-    validationSchema: YupAdminLogin,
-    onSubmit: (value) => {
-      console.log(JSON.stringify(value));
-      console.log(value.email)
-      checkUser(value.email,value.password);
-    }
-  });  
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: YupAdminLogin,
+      onSubmit: (value) => {
+        console.log(JSON.stringify(value));
+        console.log(value.email);
+        checkUser(value.email, value.password);
+      },
+    });
   return (
-    <div>
-{/* <video
+    <div className="back">
+      {/* <video
         autoPlay
         loop
         muted
@@ -84,9 +81,11 @@ function AdminLoginTable() {
       >
         <source src={MyVideo2} type="video/mp4" />
       </video> */}
-      
-      <div className="center shadow">
-        <h5 className="p-3 text-center bg-primary rounded-top bg-gradient text-white shadow">Admin Login</h5>
+
+      <div className="center shadow ">
+        <h5 className="p-3 text-center bg-primary rounded-top bg-gradient text-white shadow">
+          Admin Login
+        </h5>
         <form onSubmit={handleSubmit}>
           <div className="txt_field">
             <input
@@ -97,9 +96,11 @@ function AdminLoginTable() {
               onBlur={handleBlur}
             />
             <span></span>
-            <label>Email Id
-            {errors.email && touched.email ? (<span className="errors">{errors.email}
-              </span>) : null}
+            <label>
+              Email Id
+              {errors.email && touched.email ? (
+                <span className="errors">{errors.email}</span>
+              ) : null}
             </label>
           </div>
           <div className="txt_field">
@@ -111,15 +112,14 @@ function AdminLoginTable() {
               onBlur={handleBlur}
             />
             <span></span>
-            <label>Password
-            {errors.password && touched.password ? (<span className="errors">{errors.password}
-              </span>) : null}
+            <label>
+              Password
+              {errors.password && touched.password ? (
+                <span className="errors">{errors.password}</span>
+              ) : null}
             </label>
-          </div>        
-          <input
-            type="submit"
-            value="Login"
-          />          
+          </div>
+          <input type="submit" value="Login" />
         </form>
       </div>
     </div>

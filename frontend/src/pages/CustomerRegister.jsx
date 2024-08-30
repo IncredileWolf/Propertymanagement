@@ -1,19 +1,16 @@
-
-
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import React from "react";
 // import '../components/Error.css'
 import "../components/3.css";
-import { signUpUser }from "../schemas/SignUpCustomerYuup"
+import { signUpUser } from "../schemas/SignUpCustomerYuup";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import "../components/login.css";
 import "./CustomerRegister.css";
 
 const initialValues = {
-
   name: "",
   email: "",
   gender: "",
@@ -22,9 +19,8 @@ const initialValues = {
   address: "",
   uid: "",
   question: "",
-  answer: ""
-
-}
+  answer: "",
+};
 
 export default function CustomerRegister() {
   return (
@@ -36,272 +32,338 @@ export default function CustomerRegister() {
 
 function CustomerTable() {
   const [uidPic, setadharcardimage] = useState("");
-  const navigate=useNavigate();
-    const handleFileInput=e=>{
-    setadharcardimage(e.target.files[0])
-}
+  const navigate = useNavigate();
+  const handleFileInput = (e) => {
+    setadharcardimage(e.target.files[0]);
+  };
 
- 
-
-
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
-
-    initialValues: initialValues,
-    validationSchema: signUpUser,
-    onSubmit: async (value) => {  
-      console.log("SignUp Customer...done");
-      if(uidPic===""||uidPic===null){
-      Swal.fire({
-        position: "center",
-        title: "Please Upload Image",
-        timer: 1500,
-      });
-    return}
-      console.log(value);
-      const fd=new FormData()
-    fd.append("name",value.name)
-    fd.append("userid",value.email)
-    fd.append("gender",value.gender)
-    fd.append("phone",value.contactno)
-    fd.append("pwd",value.password) 
-    fd.append("photo",uidPic) 
-    fd.append("uid",value.uid)    
-    fd.append("question",value.question)
-    fd.append("answer",value.answer)
-    fd.append("address",value.address)
-
-
-
-    const url = `http://localhost:8080/api/customers`;
-    await axios.post(url, fd)
-    .then(resp=>{
-      Swal.fire({
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signUpUser,
+      onSubmit: async (value) => {
+        console.log("SignUp Customer...done");
+        if (uidPic === "" || uidPic === null) {
+          Swal.fire({
             position: "center",
-            icon: "success",
-            title: "Registered Successfully",
-            showConfirmButton: false,
+            title: "Please Upload Image",
             timer: 1500,
           });
-      navigate("/login")
-    })
-    .catch(error=>{
-      Swal.fire({
-            position: "center",
-            icon: "error",
-            title: error.response.data,
-            showConfirmButton: false,
-            timer: 1500,
+          return;
+        }
+        console.log(value);
+        const fd = new FormData();
+        fd.append("name", value.name);
+        fd.append("userid", value.email);
+        fd.append("gender", value.gender);
+        fd.append("phone", value.contactno);
+        fd.append("pwd", value.password);
+        fd.append("photo", uidPic);
+        fd.append("uid", value.uid);
+        fd.append("question", value.question);
+        fd.append("answer", value.answer);
+        fd.append("address", value.address);
+
+        const url = `http://localhost:8080/api/customers`;
+        await axios
+          .post(url, fd)
+          .then((resp) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Registered Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/login");
+          })
+          .catch((error) => {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: error.response.data,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
+      },
     });
-  
-       
 
-    }
-
-  
-  });
-  
   return (
-    <div className="container mt-5" style={{backgroundColor:"pink"}}>
-      <div className="title">User Registration Form</div>
-      {/* <form  > */}
-      <form onSubmit={handleSubmit}>
-        <div className="user-details">
-          <div className="input-box">
-            <span className="details">Full Name
-              {errors.name && touched.name ? (<span className="errors">{errors.name}
-              </span>) : null}
-            </span>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              id="firstName"
-              name="name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}              
-            />
-          </div>
-          <div className="input-box">
-            <span className="details">Address
-              {errors.address && touched.address ? (<span className="errors">{errors.address}
-              </span>) : null}
-            </span>
-            <input
-              type="text"
-              placeholder="Enter your address"
-              id="emailid"
-              name="address"
-              value={values.address}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </div>
-          <div className="input-box">
-            <span className="details">Mobile Number
-              {errors.contactno && touched.contactno ? (<span className="errors">{errors.contactno}
-              </span>) : null}
+    <div className="b">
+      <div
+        className="container"
+        style={{
+          // backgroundColor: "rgb(13, 95, 166)",
+          color: "white",
+          padding: "100px",
+          marginTop: "20px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "3rem",
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >
+          User <span style={{ color: "rgb(13, 95, 166)" }}>Registration</span>{" "}
+          {""}
+          Form
+        </div>
+        {/* <form  > */}
+        <form onSubmit={handleSubmit}>
+          <div className="user-details">
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Full Name
+                {errors.name && touched.name ? (
+                  <span className="errors">{errors.name}</span>
+                ) : null}
+              </span>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                id="firstName"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Address
+                {errors.address && touched.address ? (
+                  <span className="errors">{errors.address}</span>
+                ) : null}
+              </span>
+              <input
+                type="text"
+                placeholder="Enter your address"
+                id="emailid"
+                name="address"
+                value={values.address}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Mobile Number
+                {errors.contactno && touched.contactno ? (
+                  <span className="errors">{errors.contactno}</span>
+                ) : null}
+              </span>
+              <input
+                type="number"
+                maxLength={10}
+                minLength={10}
+                placeholder="Enter your number"
+                id="mobileNo"
+                name="contactno"
+                value={values.contactno}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
 
-            </span>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Email
+                {errors.email && touched.email ? (
+                  <span className="errors">{errors.email}</span>
+                ) : null}
+              </span>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                id="emailid"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Password
+                {errors.password && touched.password ? (
+                  <span className="errors">{errors.password}</span>
+                ) : null}
+              </span>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                id="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Aadhar Number
+                {errors.uid && touched.uid ? (
+                  <span className="errors">{errors.uid}</span>
+                ) : null}
+              </span>
+              <input
+                type="number"
+                placeholder="Enter your adhar number"
+                minLength={12}
+                maxLength={12}
+                name="uid"
+                value={values.uid}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Security Question
+                {errors.question && touched.question ? (
+                  <span className="errors">{errors.question}</span>
+                ) : null}
+              </span>
+              <select
+                name="question"
+                value={values.question}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option>Select Security Question</option>
+                <option>What is your nick name ?</option>
+                <option>Which is your favorite pet name ?</option>
+              </select>
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Answer
+                {errors.answer && touched.answer ? (
+                  <span className="errors">{errors.answer}</span>
+                ) : null}
+              </span>
+              <input
+                type="text"
+                name="answer"
+                placeholder="Enter your Answer"
+                value={values.answer}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            <div className="input-box">
+              <span
+                className="details"
+                style={{ color: "black", fontWeight: "bold" }}
+              >
+                Passport Photo
+              </span>
+              <input
+                type="file"
+                className="form-control"
+                placeholder="Upload Aadhar Card"
+                id="formFileSm"
+                accept=".jpg,.png,.jpeg"
+                onChange={handleFileInput}
+              />
+            </div>
+          </div>
+          <div className="gender-details">
             <input
-              type="number"
-              maxLength={10}
-              minLength={10}
-              placeholder="Enter your number"
-              id="mobileNo"
-              name="contactno"
-              value={values.contactno}
+              type="radio"
+              name="gender"
+              id="dot-1"
+              value="Male"
               onChange={handleChange}
               onBlur={handleBlur}
             />
-          </div>
-
-
-          <div className="input-box">
-            <span className="details">Email
-              {errors.email && touched.email ? (<span className="errors">{errors.email}
-              </span>) : null}
-            </span>
             <input
-              type="email"
-              placeholder="Enter your email"
-              id="emailid"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-        
-            />
-          </div>
-          <div className="input-box">
-            <span className="details">Password
-              {errors.password && touched.password ? (<span className="errors">{errors.password}
-              </span>) : null}
-            </span>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              id="password"
-              name="password"
-              value={values.password}
+              type="radio"
+              name="gender"
+              id="dot-2"
+              value="Female"
               onChange={handleChange}
               onBlur={handleBlur}
             />
-          </div>
-          <div className="input-box">
-            <span className="details">Aadhar Number
-              {errors.uid && touched.uid ? (<span className="errors">{errors.uid}
-              </span>) : null}
-            </span>
             <input
-              type="number"
-              placeholder="Enter your adhar number"
-              minLength={12}
-              maxLength={12}
-              name="uid"              
-              value={values.uid}
+              type="radio"
+              name="gender"
+              id="dot-3"
+              value="NA"
               onChange={handleChange}
               onBlur={handleBlur}
             />
-          </div>
-          <div className="input-box">
-            <span className="details">Security Question
-
-              {errors.question && touched.question ? (<span className="errors">{errors.question}
-              </span>) : null}
-            </span>
-            <select
-              name="question"
-              value={values.question}
-              onChange={handleChange}
-              onBlur={handleBlur}       
+            <span
+              className="gender-title"
+              style={{ color: "black", fontWeight: "bold" }}
             >
-              <option>Select Security Question</option>
-              <option>What is your nick name ?</option>
-              <option>Which is your favorite pet name ?</option>
-            </select>
-          </div>
-          <div className="input-box">
-            <span className="details">Answer
-              {errors.answer && touched.answer ? (<span className="errors">{errors.answer}
-              </span>) : null}
+              Gender
+              {errors.gender && touched.gender ? (
+                <span className="errors">{errors.gender}</span>
+              ) : null}
             </span>
-            <input
-              type="text"
-              name="answer"
-              placeholder="Enter your Answer"
-            
-              value={values.answer}
-              onChange={handleChange}
-              onBlur={handleBlur}
-           
-            />
+            <div className="category">
+              <label htmlFor="dot-1">
+                <span className="dot one"></span>
+                <span
+                  className="gender"
+                  style={{ color: "black", fontWeight: "bold" }}
+                >
+                  Male
+                </span>
+              </label>
+              <label htmlFor="dot-2">
+                <span className="dot two"></span>
+                <span
+                  className="gender"
+                  style={{ color: "black", fontWeight: "bold" }}
+                >
+                  Female
+                </span>
+              </label>
+              <label htmlFor="dot-3">
+                <span className="dot three"></span>
+                <span
+                  className="gender"
+                  style={{ color: "black", fontWeight: "bold" }}
+                >
+                  Prefer not to say
+                </span>
+              </label>
+            </div>
           </div>
-          <div className="input-box">
-             <span className="details">Passport Photo</span>
-            <input
-              type="file"
-              className="form-control"
-              placeholder="Upload Aadhar Card"
-              id="formFileSm"
-              accept=".jpg,.png,.jpeg"
-              onChange={handleFileInput}
-            
-            />
+          <div className="button">
+            <input type="submit" className="submit " value="Submit" />
           </div>
-        </div>
-        <div className="gender-details">
-          <input
-            type="radio"
-            name="gender"
-            id="dot-1"
-
-            value="Male"
-          
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <input
-            type="radio"
-            name="gender"
-            id="dot-2"
-            value="Female"
-            onChange={handleChange}
-            onBlur={handleBlur}
-         
-          />
-          <input
-            type="radio"
-            name="gender"
-            id="dot-3"
-            value="NA"           
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <span className="gender-title">Gender
-            {errors.gender && touched.gender ? (<span className="errors">{errors.gender}
-            </span>) : null}
-          </span>
-          <div className="category">
-            <label htmlFor="dot-1">
-              <span className="dot one"></span>
-              <span className="gender">Male</span>
-            </label>
-            <label htmlFor="dot-2">
-              <span className="dot two"></span>
-              <span className="gender">Female</span>
-            </label>
-            <label htmlFor="dot-3">
-              <span className="dot three"></span>
-              <span className="gender">Prefer not to say</span>
-            </label>
-          </div>
-        </div>
-        <div className="button">
-        
-          <input type="submit" className="submit bg-gradient" value="Submit" />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

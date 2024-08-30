@@ -1,394 +1,165 @@
-import React from 'react'
-import "../pages/OurTeam.css"
-import { Container, Row, Col, Button } from 'react-bootstrap';
-// import img1 from "../components/images/alka.jpg"
+import React from "react";
+import "../pages/OurTeam.css";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import img1 from "../components/images/Pranjali.jpeg";
+import img2 from "../components/images/shubhi.jpg";
+import img3 from "../components/images/puja.jpg";
+import img4 from "../components/images/vrunda.jpg";
+
+import img5 from "../components/images/supriya.jpg";
+import img6 from "../components/images/rohit.jpeg";
+import img7 from "../components/images/pratiksha.jpeg";
+import SecImage from "../components/SecImage";
 
 function OurTeam() {
-  
   return (
-    <> 
-    <div>About Us  <br />
-      <section id="team" class="team">
+    <>
+      <div>
+        About Us <br />
+        <section
+          id="team"
+          class="team"
+          style={{ backgroundColor: "rgb(13, 95, 166)" }}
+        >
+          <h1
+            style={{
+              fontSize: "3rem",
+              color: "white",
+              fontWeight: "bold",
+              paddingTop: "30px",
+              letterSpacing: "3px",
+            }}
+          >
+            <br /> Our Team
+          </h1>
+          <SecImage></SecImage>
 
-<h1 class="heading"><br/> Our Team</h1>
+          <div class="row">
+            <div class="card">
+              <div class="image">
+                <img src={img5} />
+                {/* add image here */}
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Supriya
+                </h4>
+              </div>
+            </div>
 
-<div class="row">
+            <div class="card">
+              <div class="image">
+                <img src={img2} />
+                {/* add image here */}
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Shubhi
+                </h4>
+              </div>
+            </div>
 
-<div class="card">
-  <div class="image">
-    {/* <img src={img1}/> */}   
-    {/* add image here */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full Stack-Web Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
+            <div class="card">
+              <div class="image">
+                <img src={img3} />
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Puja
+                </h4>
+              </div>
+            </div>
 
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
+            <div class="card">
+              <div class="image">
+                <img src={img4} alt="" />
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Vrunda
+                </h4>
+              </div>
+            </div>
 
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
+            <div class="card">
+              <div class="image">
+                <img src={img1} alt="" />
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Pranjali
+                </h4>
+              </div>
+            </div>
 
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
+            <div class="card">
+              <div class="image">
+                <img src={img7} alt="" />
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Pratiksha
+                </h4>
+              </div>
+            </div>
 
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-
-<div class="card">
-  <div class="image">
-    {/* <img  src={img2}/> */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full Stack-Web Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-
-<div class="card">
-  <div class="image">
-    {/* <img src={img3} alt=""/> */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full Stack-Web Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-<div class="card">
-  <div class="image">
-    {/* <img src={img4} alt=""/> */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full stack-Web Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-<div class="card">
-  <div class="image">
-    {/* <img src={img5} alt=""/> */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full stack-Web Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-<div class="card">
-  <div class="image">
-    {/* <img src={img6} alt=""/> */}
-  </div>
-  <div class="info">
-    <h4>XYZ</h4>
-    <h4>Full Stack Developer</h4>
-    <Button
-            className='m-1'
-            style={{ backgroundColor: '#3b5998' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-facebook-f"></i>
-          </Button>
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#55acee' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-twitter"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#dd4b39' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-google"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#ac2bac' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-instagram"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#0082ca' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </Button>
-
-          <Button
-            className='m-1'
-            style={{ backgroundColor: '#333333' }}
-            href='#!'
-            role='button'
-          >
-            <i className="fab fa-github"></i>
-          </Button>
-  </div>
-</div>
-</div>
-</section>
-
-    </div>
+            <div class="card">
+              <div class="image">
+                <img src={img6} alt="" />
+              </div>
+              <div class="info">
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                  }}
+                >
+                  Rohit
+                </h4>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
-  )
+  );
 }
 
-export default OurTeam
+export default OurTeam;

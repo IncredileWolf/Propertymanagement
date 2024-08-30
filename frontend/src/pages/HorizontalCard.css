@@ -4,13 +4,16 @@
      text-align: center;
      justify-content: center;
  }
+ h5{
+  color: white;
+ }
  .image-card1 {
      margin-top: 10px;
      margin-bottom: 20px;
        display: flex;
        justify-content:space-around;
        /* background-color:aliceblue; */
-       background-color:rgb(185, 247, 186);
+      background-color: rgb(13, 95, 166);
      }
      
      .image-container1 {

@@ -1,26 +1,23 @@
-
-
 import React, { useState } from "react";
 import axios from "axios";
 import "../components/3.css";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
-import {AddApartmentYuup} from '../schemas/AddApartmentYup'
+import { AddApartmentYuup } from "../schemas/AddApartmentYup";
 import { useFormik } from "formik";
 const initialValues = {
-
-name:"",
-address:"",
-city:"",
-state:"",
-furnish :"",
-atype:"",
-ebill:"",
-extra:"",
-gender:"",
-rent:"",
-totalbeds:"1"
-}
+  name: "",
+  address: "",
+  city: "",
+  state: "",
+  furnish: "",
+  atype: "",
+  ebill: "",
+  extra: "",
+  gender: "",
+  rent: "",
+  totalbeds: "1",
+};
 
 export default function AddApartment() {
   return (
@@ -31,99 +28,110 @@ export default function AddApartment() {
 }
 
 function AddApartmentTable() {
-  const navigate=useNavigate()
-  
+  const navigate = useNavigate();
+
   const [pic1, setpic1] = useState("");
   const [pic2, setpic2] = useState("");
   const [pic3, setpic3] = useState("");
   const [pic4, setpic4] = useState("");
 
-  const handleFile1Input=e=>{
-      setpic1(e.target.files[0])
-  }
-  const handleFile2Input=e=>{
-      setpic2(e.target.files[0])
-  }
-  const handleFile3Input=e=>{
-      setpic3(e.target.files[0])
-  }
-  const handleFile4Input=e=>{
-      setpic4(e.target.files[0])
-  }
+  const handleFile1Input = (e) => {
+    setpic1(e.target.files[0]);
+  };
+  const handleFile2Input = (e) => {
+    setpic2(e.target.files[0]);
+  };
+  const handleFile3Input = (e) => {
+    setpic3(e.target.files[0]);
+  };
+  const handleFile4Input = (e) => {
+    setpic4(e.target.files[0]);
+  };
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
-  
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: AddApartmentYuup,
+      onSubmit: async (value) => {
+        console.log(errors);
+        const fd = new FormData();
+        fd.append("name", value.name);
+        fd.append("city", value.city);
+        fd.append("district", value.state);
+        fd.append("rent", value.rent);
+        fd.append("flattype", value.atype);
+        fd.append("pic1", pic1);
+        fd.append("pic2", pic2);
+        fd.append("pic3", pic3);
+        fd.append("pic4", pic4);
+        fd.append("furnishtype", value.furnish);
+        fd.append("gender", value.gender);
+        fd.append("address", value.address);
+        fd.append("lightbill", value.ebill);
+        fd.append("extra", value.extra);
+        fd.append("totalbeds", value.totalbeds);
+        fd.append("ownerid", sessionStorage.getItem("id"));
 
-    initialValues: initialValues,
-    validationSchema: AddApartmentYuup,
-    onSubmit:  async (value) => {
-
-      console.log(errors)
-    const fd=new FormData()
-    fd.append("name",value.name)
-    fd.append("city",value.city)
-    fd.append("district",value.state)
-    fd.append("rent",value.rent)
-    fd.append("flattype",value.atype)
-    fd.append("pic1",pic1)    
-    fd.append("pic2",pic2)    
-    fd.append("pic3",pic3)    
-    fd.append("pic4",pic4)    
-    fd.append("furnishtype",value.furnish)
-    fd.append("gender",value.gender)
-    fd.append("address",value.address)
-    fd.append("lightbill",value.ebill)
-    fd.append("extra",value.extra)
-    fd.append("totalbeds",value.totalbeds)
-    fd.append("ownerid",sessionStorage.getItem("id"))
-
-
-
-    if(pic1===""||pic1===undefined||pic1===null||pic2===""||pic2===undefined||pic2===null
-    ||pic3===""||pic3===undefined||pic3===null||pic4===""||pic4===null||pic4===undefined)
-    {  swal.fire({
-        position: "center",
-        title: "Please Upload Image",
-        timer: 1500,
-      });
-      return
-    }
-    const url = `http://localhost:8080/api/apartments`;
-    await axios.post(url, fd)
-    .then(resp=>{
-      swal.fire({
+        if (
+          pic1 === "" ||
+          pic1 === undefined ||
+          pic1 === null ||
+          pic2 === "" ||
+          pic2 === undefined ||
+          pic2 === null ||
+          pic3 === "" ||
+          pic3 === undefined ||
+          pic3 === null ||
+          pic4 === "" ||
+          pic4 === null ||
+          pic4 === undefined
+        ) {
+          swal.fire({
             position: "center",
-            icon: "success",
-            title: "Tour Package Added..",
-            showConfirmButton: false,
+            title: "Please Upload Image",
             timer: 1500,
           });
-      navigate("/apartments")
-    })
-    .catch(error=>{
-      swal.fire({
-            position: "center",
-            icon: "error",
-            title: error.response.data,
-            showConfirmButton: false,
-            timer: 1500,
+          return;
+        }
+        const url = `http://localhost:8080/api/apartments`;
+        await axios
+          .post(url, fd)
+          .then((resp) => {
+            swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Property Added successfully..",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/apartments");
+          })
+          .catch((error) => {
+            swal.fire({
+              position: "center",
+              icon: "error",
+              title: error.response.data,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
+      },
     });
-  }
-});
-console.log(pic1);
-console.log(pic2);
-console.log(pic3);
-console.log(pic4);
+  console.log(pic1);
+  console.log(pic2);
+  console.log(pic3);
+  console.log(pic4);
   return (
-    <div className="container mt-5" style={{backgroundColor:"floralwhite"}}>
+    <div className="container mt-5" style={{ backgroundColor: "floralwhite" }}>
       <div className="title">Add Property</div>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <div className="user-details">
           <div className="input-box">
-            <span className="details">Property Name
-            {errors.name && touched.name ? (<span className="errors">{errors.name}
-              </span>) : null}
+            <span className="details">
+              Property Name
+              {errors.name && touched.name ? (
+                <span className="errors">{errors.name}</span>
+              ) : null}
             </span>
             <input
               type="text"
@@ -136,9 +144,11 @@ console.log(pic4);
             />
           </div>
           <div className="input-box">
-            <span className="details">Address
-            {errors.address && touched.address ? (<span className="errors">{errors.address}
-              </span>) : null}
+            <span className="details">
+              Address
+              {errors.address && touched.address ? (
+                <span className="errors">{errors.address}</span>
+              ) : null}
             </span>
             <input
               type="text"
@@ -151,9 +161,11 @@ console.log(pic4);
             />
           </div>
           <div className="input-box">
-            <span className="details">City
-            {errors.city && touched.city ? (<span className="errors">{errors.city}
-              </span>) : null}
+            <span className="details">
+              City
+              {errors.city && touched.city ? (
+                <span className="errors">{errors.city}</span>
+              ) : null}
             </span>
             <input
               type="text"
@@ -161,14 +173,16 @@ console.log(pic4);
               name="city"
               value={values.city}
               onChange={handleChange}
-              onBlur={handleBlur}             
+              onBlur={handleBlur}
             />
-          </div>          
-          
+          </div>
+
           <div className="input-box">
-            <span className="details">State
-            {errors.state && touched.state ? (<span className="errors">{errors.state}
-              </span>) : null}
+            <span className="details">
+              State
+              {errors.state && touched.state ? (
+                <span className="errors">{errors.state}</span>
+              ) : null}
             </span>
             <input
               type="text"
@@ -177,13 +191,14 @@ console.log(pic4);
               value={values.state}
               onChange={handleChange}
               onBlur={handleBlur}
-
             />
           </div>
           <div className="input-box">
-            <span className="details">Selling Price
-            {errors.rent && touched.rent ? (<span className="errors">{errors.rent}
-              </span>) : null}
+            <span className="details">
+              Selling Price
+              {errors.rent && touched.rent ? (
+                <span className="errors">{errors.rent}</span>
+              ) : null}
             </span>
             <input
               type="number"
@@ -196,9 +211,11 @@ console.log(pic4);
             />
           </div>
           <div className="input-box">
-            <span className="details">Electricity bill
-            {errors.ebill && touched.ebill ? (<span className="errors">{errors.ebill}
-              </span>) : null}
+            <span className="details">
+              Electricity bill
+              {errors.ebill && touched.ebill ? (
+                <span className="errors">{errors.ebill}</span>
+              ) : null}
             </span>
             <input
               type="number"
@@ -211,12 +228,14 @@ console.log(pic4);
             />
           </div>
           <div className="input-box">
-            <span className="details">Extra Facility
-            {errors.extra && touched.extra ? (<span className="errors">{errors.extra}
-              </span>) : null}
+            <span className="details">
+              Extra Facility
+              {errors.extra && touched.extra ? (
+                <span className="errors">{errors.extra}</span>
+              ) : null}
             </span>
             <input
-              type="text"              
+              type="text"
               placeholder="Enter extra facility"
               name="extra"
               value={values.extra}
@@ -224,32 +243,36 @@ console.log(pic4);
               onBlur={handleBlur}
             />
           </div>
-          
+
           <div className="input-box">
-            <span className="details">Gender
-            {errors.gender && touched.gender ? (<span className="errors">{errors.gender}
-              </span>) : null}            
+            <span className="details">
+              Gender
+              {errors.gender && touched.gender ? (
+                <span className="errors">{errors.gender}</span>
+              ) : null}
             </span>
             <select
               name="gender"
               value={values.gender}
               onChange={handleChange}
               onBlur={handleBlur}
-            //  required
+              //  required
             >
               <option>Select Gender</option>
               <option>Male</option>
               <option>Female</option>
-              <option>Both M/F</option> 
+              <option>Both M/F</option>
             </select>
           </div>
           <div className="input-box">
-            <span className="details">Select Property Type
-            {errors.atype && touched.atype ? (<span className="errors">{errors.atype}
-              </span>) : null}
+            <span className="details">
+              Select Property Type
+              {errors.atype && touched.atype ? (
+                <span className="errors">{errors.atype}</span>
+              ) : null}
             </span>
             <select
-            name="atype"
+              name="atype"
               value={values.atype}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -261,9 +284,11 @@ console.log(pic4);
             </select>
           </div>
           <div className="input-box">
-            <span className="details">Select Furnish Type
-            {errors.furnish && touched.furnish ? (<span className="errors">{errors.furnish}
-              </span>) : null}
+            <span className="details">
+              Select Furnish Type
+              {errors.furnish && touched.furnish ? (
+                <span className="errors">{errors.furnish}</span>
+              ) : null}
             </span>
             <select
               name="furnish"
@@ -278,9 +303,11 @@ console.log(pic4);
             </select>
           </div>
           <div className="input-box">
-            <span className="details">No of House
-            {errors.totalbeds && touched.totalbeds ? (<span className="errors">{errors.totalbeds}
-              </span>) : null}
+            <span className="details">
+              No of House
+              {errors.totalbeds && touched.totalbeds ? (
+                <span className="errors">{errors.totalbeds}</span>
+              ) : null}
             </span>
             <input
               type="number"
@@ -291,7 +318,6 @@ console.log(pic4);
               value={values.totalbeds}
               onChange={handleChange}
               onBlur={handleBlur}
-              
             />
           </div>
           <div className="input-box">
@@ -299,7 +325,7 @@ console.log(pic4);
             <input
               type="file"
               placeholder="First Photo"
-               onChange={handleFile1Input}
+              onChange={handleFile1Input}
             />
           </div>
           <div className="input-box">
@@ -307,7 +333,7 @@ console.log(pic4);
             <input
               type="file"
               placeholder="First Photo"
-             onChange={handleFile2Input}
+              onChange={handleFile2Input}
             />
           </div>
           <div className="input-box">
@@ -315,8 +341,7 @@ console.log(pic4);
             <input
               type="file"
               placeholder="First Photo"
-             onChange={handleFile3Input}
-             
+              onChange={handleFile3Input}
             />
           </div>
           <div className="input-box">
@@ -324,12 +349,11 @@ console.log(pic4);
             <input
               type="file"
               placeholder="First Photo"
-             onChange={handleFile4Input}
-             
+              onChange={handleFile4Input}
             />
           </div>
         </div>
-        
+
         <div className="button">
           <input type="submit" value="Submit" />
         </div>

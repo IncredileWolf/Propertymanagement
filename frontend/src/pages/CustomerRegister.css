@@ -1,6 +1,14 @@
 .container{
+            background-color: rgb(247, 247, 255);
     /* background-color: #E3DFFD !important; */
 }
 .submit{
-    background-color: #EA047E !important;
+    /* background-color: #EA047E !important; */
+    /* background-color: rgb(13, 95, 166); */
+}
+.b{
+
+        /* background-color: rgb(13, 95, 166); */
+        /* background-color: rgb(247, 247, 255); */
+        height: 95vh;
 }

@@ -5,7 +5,7 @@
   }
   
   *{
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     margin:0; padding:0;
     box-sizing: border-box;
     text-transform: capitalize;
@@ -41,6 +41,7 @@
   }
   
   .team .row .card{
+    padding: 20px;
     height:25rem;
     width:20rem;
     background:#fff;
@@ -48,18 +49,17 @@
     margin:2rem 3rem;
     position: relative;
     overflow: hidden;
-    -webkit-box-reflect: below .2rem linear-gradient(transparent 70%, #0004);
   }
   
   .team .row .card .image{
-    margin:1rem 0;
-    padding-top: 4rem;
+    /* margin:1rem 0;
+    padding-top: 4rem; */
   }
   
   .team .row .card .image img{
-    height:10rem;
-    width:10rem;
-    border-radius: 50%;
+    height:100%;
+    width:100%;
+    /* border-radius: 50%; */
     border:.5rem solid #fff;
     box-shadow: 0 0 .5rem rgba(0,0,0,.3);
     object-fit: cover;

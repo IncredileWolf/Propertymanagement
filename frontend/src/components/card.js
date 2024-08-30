@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Card() {
   const [data, setData] = useState([]);
@@ -11,7 +11,7 @@ export default function Card() {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/apartments').then((resp) => {
+    axios.get("http://localhost:8080/api/apartments").then((resp) => {
       setData(resp.data);
     });
   }, []);
@@ -29,53 +29,63 @@ export default function Card() {
   );
 
   return (
-    <div className='mt-2 mx-auto' style={{ width: '96%' }}>
-      <div className='row'>
+    <div className="mt-2 mx-auto" style={{ width: "96%" }}>
+      <h1
+        style={{
+          fontSize: "3.5rem",
+          fontWeight: "bold",
+          display: "flex",
+          justifyContent: "center",
+          color: "rgb(13, 95, 166)",
+        }}
+      >
+        Properties
+      </h1>
+      <div className="row">
         {paginatedData.map((x) => (
-          <div className='col-sm-4' key={x.id}>
-            <div className='card border-2 shadow mb-2 bg-white rounded'>
-              <div className='card-header text-center'>
-                <h5 className='card-title'>{x.name}</h5>
+          <div className="col-sm-4" key={x.id}>
+            <div className="card border-2 shadow mb-2 bg-white rounded">
+              <div className="card-header text-center">
+                <h5 className="card-title">{x.name}</h5>
                 <b>
                   Address:- {x.address} <br /> City:- {x.city}
-                </b>{' '}
+                </b>{" "}
                 <br /> {x.district} India
               </div>
               <img
-                src={'http://localhost:8080/' + x.photo1}
-                style={{ height: '300px' }}
-                className='img-fluid rounded-start'
-                alt='...'
+                src={"http://localhost:8080/" + x.photo1}
+                style={{ height: "300px" }}
+                className="img-fluid rounded-start"
+                alt="..."
               />
-              <div className='card-body'>
-                <p className='card-text font-weight-bold'>
-                  <div className='float-start'>
-                    Type <span className='fw-bold'>{x.flattype}</span>
+              <div className="card-body">
+                <p className="card-text font-weight-bold">
+                  <div className="float-start">
+                    Type <span className="fw-bold">{x.flattype}</span>
                   </div>
-                  <div className='float-end fw-bold'>
-                    For {x.gender} only
-                  </div>
-                  <div className='clearfix'></div>
-                  <div className='fw-bold'>{x.furnishtype}</div>
+                  <div className="float-end fw-bold">For {x.gender} only</div>
+                  <div className="clearfix"></div>
+                  <div className="fw-bold">{x.furnishtype}</div>
                 </p>
-                <p className='card-text'>
+                <p className="card-text">
                   Facility: {x.extra}
                   <br />
                   Selling Price:- ₹ {x.rent}+₹ {x.lightbill}(Extra) (Negotiable)
                 </p>
                 <p>
-                  Property Owner Details:{' '}
-                  <span className='fw-bold text-success'>
+                  Property Owner Details:{" "}
+                  <span className="fw-bold text-success">
                     {x.owner.name} (Ph: {x.owner.phone})
                   </span>
                 </p>
-                <p className='card-text'>
-                  {state.loggedin.IsLoggedIn && state.loggedin.Role === 'Customer' ? (
-                    <Link className='btn btn-warning' to={'/apdetails/' + x.id}>
+                <p className="card-text">
+                  {state.loggedin.IsLoggedIn &&
+                  state.loggedin.Role === "Customer" ? (
+                    <Link className="btn btn-warning" to={"/apdetails/" + x.id}>
                       BUY House
                     </Link>
                   ) : (
-                    ''
+                    ""
                   )}
                 </p>
               </div>
@@ -83,7 +93,7 @@ export default function Card() {
           </div>
         ))}
       </div>
-      <div className='d-flex justify-content-center mt-3'>
+      {/* <div className='d-flex justify-content-center mt-3'>
         <nav aria-label='Page navigation example'>
           <ul className='pagination'>
             <li
@@ -121,9 +131,7 @@ export default function Card() {
             </li>
           </ul>
         </nav>
-      </div>
+      </div> */}
     </div>
   );
 }
-
-

@@ -27,24 +27,27 @@ export default function Apartments() {
 
   const deleteApartment = (id) => {
     axios
-      .delete('http://localhost:8080/api/apartments/' + id)
+      .delete("http://localhost:8080/api/apartments/" + id)
       .then((resp) => {
         Swal.fire({ title: resp.data });
-        navigate('/apartments');
+        navigate("/apartments");
       })
       .catch((error) => {
-        Swal.fire({ title: 'Appartment already in use' });
+        Swal.fire({ title: "Appartment already in use" });
       });
   };
 
   useEffect(() => {
-    if (role === 'Admin') {
-      axios.get('http://localhost:8080/api/apartments/')
-        .then((resp) => {
-          setData(resp.data);
-        });
+    if (role === "Admin") {
+      axios.get("http://localhost:8080/api/apartments/").then((resp) => {
+        setData(resp.data);
+      });
     } else {
-      axios.get('http://localhost:8080/api/apartments/owners/' + sessionStorage.getItem("id"))
+      axios
+        .get(
+          "http://localhost:8080/api/apartments/owners/" +
+            sessionStorage.getItem("id")
+        )
         .then((resp) => {
           setData(resp.data);
         });
@@ -53,10 +56,18 @@ export default function Apartments() {
 
   return (
     <>
-      <div className="container mt-5" style={{backgroundColor:"aliceblue"}}>
-        {role === 'Owner' ? (
-          <Link to="/addnew" className="btn btn-primary btn-sm float-end">Add new Property</Link>
-        ) : ""}
+      <div className="container mt-5" style={{ backgroundColor: "aliceblue" }}>
+        {role === "Owner" ? (
+          <Link
+            to="/addnew"
+            className="btn btn-primary float-end"
+            style={{ color: "red !important" }}
+          >
+            Add new Property
+          </Link>
+        ) : (
+          ""
+        )}
         <h5 className="p-2">Property List</h5>
         <table className="table table-bordered">
           <thead>
@@ -72,7 +83,7 @@ export default function Apartments() {
             </tr>
           </thead>
           <tbody>
-            {paginatedData.map(x => (
+            {paginatedData.map((x) => (
               <tr key={x.id}>
                 <td>{x.id}</td>
                 <td>{x.name}</td>
@@ -82,10 +93,20 @@ export default function Apartments() {
                 <td>{x.district}</td>
                 <td>Rs. {x.rent}</td>
                 <td>
-                  {role === 'Admin' ? (
-                    <button onClick={() => deleteApartment(x.id)} className="btn btn-outline-danger btn-sm float-end">Delete Property</button>
+                  {role === "Admin" ? (
+                    <button
+                      onClick={() => deleteApartment(x.id)}
+                      className="btn btn-outline-danger btn-sm float-end"
+                    >
+                      Delete Property
+                    </button>
                   ) : (
-                    <Link to={'/apartmentdetails/' + x.id} className="btn btn-primary btn-sm">Details</Link>
+                    <Link
+                      to={"/apartmentdetails/" + x.id}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Details
+                    </Link>
                   )}
                 </td>
               </tr>
@@ -95,16 +116,42 @@ export default function Apartments() {
         <div className="d-flex justify-content-center mt-3">
           <nav aria-label="Page navigation example">
             <ul className="pagination">
-              <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => handleClick(currentPage - 1)}>Previous</button>
+              <li
+                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => handleClick(currentPage - 1)}
+                >
+                  Previous
+                </button>
               </li>
               {Array.from({ length: totalPages }, (_, index) => (
-                <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                  <button className="page-link" onClick={() => handleClick(index + 1)}>{index + 1}</button>
+                <li
+                  key={index}
+                  className={`page-item ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => handleClick(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
                 </li>
               ))}
-              <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                <button className="page-link" onClick={() => handleClick(currentPage + 1)}>Next</button>
+              <li
+                className={`page-item ${
+                  currentPage === totalPages ? "disabled" : ""
+                }`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => handleClick(currentPage + 1)}
+                >
+                  Next
+                </button>
               </li>
             </ul>
           </nav>
