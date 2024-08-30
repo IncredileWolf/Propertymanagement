@@ -6,8 +6,8 @@ import img2 from "../components/images/shubhi.jpg";
 import img3 from "../components/images/puja.jpg";
 import img4 from "../components/images/vrunda.jpg";
 
-import img6 from "../components/images/supriya.jpg";
 import img5 from "../components/images/rohit.jpeg";
+import img6 from "../components/images/supriya.jpg";
 import img7 from "../components/images/pratiksha.jpeg";
 import SecImage from "../components/SecImage";
 
